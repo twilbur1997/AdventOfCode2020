@@ -18,13 +18,14 @@ def day_1_challenge_part_1():
     return 0
 
 def day_1_challenge_part_2():
+    # bug: doesn't work for repeated numbers, such as 2000, 10, 10
     input_file = "input_01_day.txt"
 
     with open(input_file, "r") as file:
         prev_lines = []
         line = int(file.readline().strip())
         while line:
-            for prev in prev_lines:
+            for prev in prev_lines: # Change this to the index instead of value
                 for prev2 in prev_lines:
                     if prev2 != prev:
                         if line + prev + prev2 == 2020:
