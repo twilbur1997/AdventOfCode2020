@@ -8,9 +8,9 @@ def day_1_challenge_part_1():
         prev_lines = []
         line = int(file.readline().strip())
         while line:
-            for prev in prev_lines:
-                if line + prev == 2020:
-                    return line*prev
+            for prev_num in prev_lines:
+                if line + prev_num == 2020:
+                    return line*prev_num
 
             prev_lines.append(line)
             line = int(file.readline().strip())
@@ -22,16 +22,16 @@ def day_1_challenge_part_2():
     input_file = "input_01_day.txt"
 
     with open(input_file, "r") as file:
-        prev_lines = []
+        prev = []
         line = int(file.readline().strip())
         while line:
-            for prev in prev_lines: # Change this to the index instead of value
-                for prev2 in prev_lines:
-                    if prev2 != prev:
-                        if line + prev + prev2 == 2020:
-                            return line*prev*prev2
+            for prev1_i in range(len(prev)):
+                for prev2_i in range(len(prev)):
+                    if prev1_i != prev2_i:
+                        if line+prev[prev1_i]+prev[prev2_i] == 2020:
+                            return line*prev[prev1_i]*prev[prev2_i]
 
-            prev_lines.append(line)
+            prev.append(line)
             line = int(file.readline().strip())
 
     return 0
