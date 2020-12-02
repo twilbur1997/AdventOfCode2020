@@ -1,7 +1,7 @@
 import os
 
 
-def day_1_challenge_part_1():
+def day_01_challenge_part_1():
     input_file = "input_01_day.txt"
 
     with open(input_file, "r") as file:
@@ -17,7 +17,7 @@ def day_1_challenge_part_1():
 
     return 0
 
-def day_1_challenge_part_2():
+def day_01_challenge_part_2():
     # bug: doesn't work for repeated numbers, such as 2000, 10, 10
     input_file = "input_01_day.txt"
 
@@ -38,8 +38,9 @@ def day_1_challenge_part_2():
 
 
 def main():
-    # print(day_1_challenge_part_1())
-    print(day_1_challenge_part_2())
+    print("Day 1 Part 1: ", day_01_challenge_part_1())
+    print("Day 1 Part 2: ", day_01_challenge_part_2())
+
 
 
 
