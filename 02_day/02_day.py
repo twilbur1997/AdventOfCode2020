@@ -1,6 +1,3 @@
-import os
-
-
 def day_02_challenge_part_1():
     input_file = "input_02_day.txt"
 
