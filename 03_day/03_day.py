@@ -17,7 +17,7 @@ def day_03_challenge_part_1():
     return num_trees
 
 
-def find_trees(right_num = 1, down_num = 1):
+def find_trees(right_num, down_num):
     input_file = "input_03_day.txt"
 
     with open(input_file, "r") as file:
@@ -26,17 +26,16 @@ def find_trees(right_num = 1, down_num = 1):
 
         num_trees = 0
         x_pos = 0
-        if line[x_pos] == "#":
-            num_trees += 1
-
-        x_pos = (x_pos + 3) % width
-        line = file.readline()
         while line:
             if line[x_pos] == "#":
                 num_trees += 1
 
-            x_pos = (x_pos + 3) % width
-            line = file.readline()
+            x_pos = (x_pos + right_num) % width
+            for i in range(down_num):
+                line = file.readline()
+
+    return num_trees
+
 
 def day_03_challenge_part_2():
     """
@@ -46,13 +45,18 @@ def day_03_challenge_part_2():
     Right 7, down 1.
     Right 1, down 2.
     """
+    trees_mult = 1
     pairs_list = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+    for right_num, down_num in pairs_list:
+        trees_mult *= find_trees(right_num, down_num)
+
+    return trees_mult
 
 
 
 def main():
     print("Day 3 Part 1: ", day_03_challenge_part_1())
-    # print("Day 3 Part 2: ", day_03_challenge_part_2())
+    print("Day 3 Part 2: ", day_03_challenge_part_2())
 
 
 if __name__ == "__main__":
