@@ -6,10 +6,13 @@ def day_03_challenge_part_1():
         # following a slope of right 3 and down 1,
         # how many trees would you encounter?
         line = file.readline() # skip first line
-        width = len(line)
+        width = len(line)-1
+        print(line, width)
 
         num_trees = 0
         x_pos = 0
+        if line[x_pos] == "#":
+            num_trees += 1
 
         x_pos = (x_pos + 3) % width
         line = file.readline()
@@ -21,6 +24,7 @@ def day_03_challenge_part_1():
             line = file.readline()
 
     return num_trees
+
 
 
 def main():
