@@ -53,7 +53,6 @@ def day_03_challenge_part_2():
     return trees_mult
 
 
-
 def main():
     print("Day 3 Part 1: ", day_03_challenge_part_1())
     print("Day 3 Part 2: ", day_03_challenge_part_2())
