@@ -46,6 +46,7 @@ ecl_set = {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}
 
 def check_byr(byr):
     if (len(byr) != num_len):
+        # print("byr length error: ", byr, " ",len(byr))
         return False
     return (int(byr)>=min_byr and int(byr)<=max_byr)
 
@@ -75,18 +76,18 @@ def check_hgt_cm(hgt):
 
 
 def check_hcl(hcl):
-    print("\n\n", hcl)
+    # print("\n\n", hcl)
     hcl = hcl.strip()
     if len(hcl) != 7:
-        print("invalid length: ", len(hcl))
+        # print("hcl invalid length: ", len(hcl))
         return False
     if hcl[0] != "#":
-        print("'#' missing")
+        # print("'#' missing")
         return False
     hcl = hcl[1:]
     for char in hcl:
         if not char.isdigit() and char not in hcl_char_set:
-            print("invalid character")
+            # print("invalid character")
             return False
     return True
 
@@ -138,15 +139,15 @@ def find_passports(check, missing_inputs = {"cid"}):
             if line == "\n":
                 if exp_inputs - found_params == {0}-{0}:
                     num_passports += 1
-                print(exp_inputs - found_params)
+                # print(exp_inputs - found_params)
                 found_params = {0}-{0}
                 line = file.readline()
                 continue
 
             key_vals = line.split(" ")
             for pair in key_vals:
-                key, val = pair.split(":")
-                if check and check_functions[key](val):
+                key,val = pair.split(":")
+                if check and check_functions[key](val.strip()): # .strip() 
                     found_params.add(key)
 
             prev_line = line
