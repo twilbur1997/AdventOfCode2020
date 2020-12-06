@@ -46,9 +46,37 @@ def day_05_challenge_part_1():
     return highest_id
 
 
+def day_05_challenge_part_2():
+    input_file = "input_05_day.txt"
+
+    existing_ids = []
+    with open(input_file, "r") as file:
+        line = file.readline().strip()
+        while line:
+            row, col = get_row_col_number(line)
+            current_id = get_seat_ID(row, col)
+            existing_ids.append(current_id)
+            line = file.readline().strip()
+
+    last_id = 0
+    existing_ids.sort()
+    for id in existing_ids:
+        print(id)
+    """
+    for count, id in enumerate(existing_ids):
+        last_id = id
+        if count == 0 or count == len(existing_ids)-1:
+            continue
+        if ((last_id+2) == id) and ((id+2) in existing_ids):
+            return id
+    """
+
+    return 0
+
+
 def main():
-    print("Day 5 Part 1: ", day_05_challenge_part_1())
-    # print("Day 5 Part 2: ", day_05_challenge_part_2())
+    # print("Day 5 Part 1: ", day_05_challenge_part_1())
+    print("Day 5 Part 2: ", day_05_challenge_part_2())
 
 
 if __name__ == "__main__":
