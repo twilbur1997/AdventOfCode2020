@@ -129,7 +129,6 @@ def find_passports(check, missing_inputs = {"cid"}):
     # exp_inputs = [x for x in exp_inputs if x not in missing_inputs]
 
     with open(input_file, "r") as file:
-
         found_params = {0}-{0}
         # https://stackoverflow.com/questions/6130374/empty-set-literal
 
@@ -147,7 +146,7 @@ def find_passports(check, missing_inputs = {"cid"}):
             key_vals = line.split(" ")
             for pair in key_vals:
                 key,val = pair.split(":")
-                if check and check_functions[key](val.strip()): # .strip() 
+                if check and check_functions[key](val.strip()): # .strip()
                     found_params.add(key)
 
             prev_line = line
