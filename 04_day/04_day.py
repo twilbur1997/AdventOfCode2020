@@ -159,8 +159,10 @@ def find_passports(check, missing_inputs = {"cid"}):
 
     return num_passports
 
+
 def day_04_challenge_part_1():
     return find_passports(check = False)
+
 
 def day_04_challenge_part_2():
     return find_passports(check = True)
@@ -169,8 +171,6 @@ def day_04_challenge_part_2():
 def main():
     # print("Day 4 Part 1: ", day_04_challenge_part_1())
     print("Day 4 Part 2: ", day_04_challenge_part_2())
-
-
 
 
 if __name__ == "__main__":
