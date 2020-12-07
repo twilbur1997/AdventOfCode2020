@@ -8,17 +8,17 @@ def get_row_col_number(line):
 
     row_num = 0
     binary_add = 64
-    for char in line[:8]: # first 7 characters
+    for char in line:
         if char == 'B':
             row_num += binary_add
-        binary_add /= 2
+        binary_add //= 2
 
     col_num = 0
     binary_add = 4
-    for char in line[8:]: # rest of the characters
+    for char in line[-3:]: # rest of the characters
         if char == 'R':
             col_num += binary_add
-        binary_add /= 2
+        binary_add //= 2
 
     return row_num, col_num
 
@@ -38,6 +38,8 @@ def day_05_challenge_part_1():
         while line:
             row, col = get_row_col_number(line)
             current_id = get_seat_ID(row, col)
+            # print(row, col)
+            # print(current_id)
             if current_id > highest_id:
                 highest_id = current_id
 
@@ -58,24 +60,16 @@ def day_05_challenge_part_2():
             existing_ids.append(current_id)
             line = file.readline().strip()
 
-    last_id = 0
     existing_ids.sort()
-    for id in existing_ids:
-        print(id)
-    """
+    first_seat = existing_ids[0]
     for count, id in enumerate(existing_ids):
-        last_id = id
-        if count == 0 or count == len(existing_ids)-1:
-            continue
-        if ((last_id+2) == id) and ((id+2) in existing_ids):
-            return id
-    """
-
+        if id != count+first_seat:
+            return id-1
     return 0
 
 
 def main():
-    # print("Day 5 Part 1: ", day_05_challenge_part_1())
+    print("Day 5 Part 1: ", day_05_challenge_part_1())
     print("Day 5 Part 2: ", day_05_challenge_part_2())
 
 
