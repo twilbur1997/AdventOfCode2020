@@ -1,4 +1,5 @@
 import copy
+import time
 
 
 def generate_luggage():
@@ -31,40 +32,49 @@ def generate_luggage():
     return luggage_dict
 
 
-def start_recurse_bags(luggage, find_bag):
+def start_recurse_bags(luggage, find_bag, count_bags):
     # Find how many parent bags can eventually fit "find_bag"
     total_bags = 0
     for parent_bag in luggage.keys():
-        total_bags += recurse_bags(luggage, parent_bag, find_bag)
+        total_bags += recurse_bags(luggage, parent_bag, find_bag, count_bags)
         print(total_bags)
 
     return total_bags
 
 
-def recurse_bags(luggage, parent_bag, find_bag):
+def recurse_bags(luggage, parent_bag, find_bag, count_bags):
     total = 0
     if parent_bag not in luggage: # due to del later, doesn't affect top level
         return 0
     children_bags = luggage[parent_bag]
     for pair in children_bags:
         if pair[1] == find_bag:
-            return 1
+            if count_bags:
+                return pair[0]
+            else:
+                return 1
 
         # prevent infinite loops
-        luggage2 = copy.deepcopy(luggage)
-        del luggage2[parent_bag]
-        total += recurse_bags(luggage2, pair[1], find_bag)
+        # luggage2 = copy.deepcopy(luggage)
+        # del luggage2[parent_bag]
+        total += pair[0]*recurse_bags(luggage, pair[1], find_bag, count_bags)
 
-    return (total > 0)
+    if count_bags:
+        return total
+    else:
+        return (total > 0)
 
 
-def day_07_challenge_part_1(input_bag):
+def day_07_challenge_part_1(input_bag, count_bags):
     luggage_dict = generate_luggage()
-    return start_recurse_bags(luggage_dict, input_bag)
+    return start_recurse_bags(luggage_dict, input_bag, count_bags)
 
 
 def main():
-    print(day_07_challenge_part_1("shiny gold"))
+    start = time.time()
+    # print(day_07_challenge_part_1("shiny gold", False))
+    print(day_07_challenge_part_1("shiny gold", True))
+    print("Time elapsed: ", time.time() - start)
 
 
 if __name__ == "__main__":
