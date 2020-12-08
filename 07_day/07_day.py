@@ -1,6 +1,3 @@
-import copy
-
-
 def generate_luggage():
     input_file = "input_07_day.txt"
 
