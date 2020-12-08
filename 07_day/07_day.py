@@ -51,8 +51,8 @@ def recurse_bags(luggage, parent_bag, find_bag):
             return 1
 
         # prevent infinite loops
-        luggage2 = copy.deepcopy(luggage)
-        del luggage2[parent_bag]
+        # luggage2 = copy.deepcopy(luggage)
+        # del luggage2[parent_bag]
         total += recurse_bags(luggage2, pair[1], find_bag)
 
     return (total > 0)
