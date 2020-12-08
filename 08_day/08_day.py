@@ -1,23 +1,24 @@
-import os
-
-
-def day_08_challenge_part_1():
+def read_instructions():
     input_file = "input_08_day.txt"
+    instructions = []
 
     with open(input_file, "r") as file:
-        prev_lines = []
-        line = int(file.readline().strip())
-
+        line = file.readline().strip()
         while line:
-            prev_lines.append(line)
-            line = int(file.readline().strip())
+            instructions.append(line)
+            line = file.readline().strip()
 
-    return 0
-    
+    return instructions
+
+def day_08_challenge_part_1():
+    instructions = read_instructions()
+
+
 
 def main():
     print(day_08_challenge_part_1())
-    
+    # print(day_08_challenge_part_2())
+
 
 if __name__ == "__main__":
     main()
