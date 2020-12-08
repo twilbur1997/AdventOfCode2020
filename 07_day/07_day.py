@@ -31,17 +31,25 @@ def generate_luggage():
     return luggage_dict
 
 
-def start_recurse_bags(luggage, find_bag):
+def start_part1(luggage, find_bag):
     # Find how many parent bags can eventually fit "find_bag"
     total_bags = 0
     for parent_bag in luggage.keys():
-        total_bags += recurse_bags(luggage, parent_bag, find_bag)
-        print(total_bags)
+        total_bags += recurse_bags_find(luggage, parent_bag, find_bag)
+        # print(total_bags)
 
     return total_bags
 
 
-def recurse_bags(luggage, parent_bag, find_bag):
+def start_part2(luggage, first_bag):
+    # Find how many bags must eventually fit inside "first_bag"
+    total_bags = 0
+    total_bags += recurse_bags_dig(luggage, first_bag)
+
+    return total_bags
+
+
+def recurse_bags_find(luggage, parent_bag, find_bag):
     total = 0
     if parent_bag not in luggage: # due to del later, doesn't affect top level
         return 0
@@ -50,21 +58,37 @@ def recurse_bags(luggage, parent_bag, find_bag):
         if pair[1] == find_bag:
             return 1
 
-        # prevent infinite loops
-        # luggage2 = copy.deepcopy(luggage)
-        # del luggage2[parent_bag]
-        total += recurse_bags(luggage2, pair[1], find_bag)
+        total += recurse_bags_find(luggage, pair[1], find_bag)
 
     return (total > 0)
 
 
+def recurse_bags_dig(luggage, parent_bag):
+    total = 0
+    if parent_bag not in luggage: # due to del later, doesn't affect top level
+        return 0
+    children_bags = luggage[parent_bag]
+    for pair in children_bags:
+        num_bags = pair[0]
+        total += (num_bags + (num_bags*recurse_bags_dig(luggage, pair[1])))
+
+    return total
+
+
+
 def day_07_challenge_part_1(input_bag):
     luggage_dict = generate_luggage()
-    return start_recurse_bags(luggage_dict, input_bag)
+    return start_part1(luggage_dict, input_bag)
+
+
+def day_07_challenge_part_2(input_bag):
+    luggage_dict = generate_luggage()
+    return start_part2(luggage_dict, input_bag)
 
 
 def main():
-    print(day_07_challenge_part_1("shiny gold"))
+    # print(day_07_challenge_part_1("shiny gold"))
+    print(day_07_challenge_part_2("shiny gold"))
 
 
 if __name__ == "__main__":
