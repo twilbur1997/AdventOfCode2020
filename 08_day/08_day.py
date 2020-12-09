@@ -13,6 +13,7 @@ def read_instructions():
 
 def process_instruction(line):
     command, number = line.split(" ")
+    print(line.split(" "))
     number = int(number)
     return command, number
 
@@ -23,15 +24,13 @@ def day_08_challenge_part_1():
     accumulator = 0
     prev_counts = {0}-{0}
     while count < len(instructions):
+        cmd, num = process_instruction(instructions[count])
         if count in prev_counts:
             return accumulator
         prev_counts.add(count)
-        cmd, num = process_instruction(instructions[count])
-        if cmd == "acc":
-            accumulator += num
-        elif cmd == "jmp":
-            count += num
-            continue
+
+        accumulator += num*(cmd == "acc")
+        count += (num-1)*(cmd == "jmp")
         count += 1
 
     return 0
