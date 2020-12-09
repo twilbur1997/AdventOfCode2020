@@ -24,14 +24,17 @@ def day_08_challenge_part_1():
     accumulator = 0
     prev_counts = {0}-{0}
     while count < len(instructions):
+        print("Count: ", count)
+        print("Acc: ", accumulator)
         cmd, num = process_instruction(instructions[count])
+
         if count in prev_counts:
             return accumulator
         prev_counts.add(count)
 
         accumulator += num*(cmd == "acc")
-        count += (num-1)*(cmd == "jmp")
-        count += 1
+        count += num*(cmd == "jmp")
+        count += 1*(cmd != "jmp")
 
     return 0
 
