@@ -24,11 +24,35 @@ def day_09_challenge_part_1():
     return 0
 
 
-def day_09_challenge_part_2():
+def check_invalid(num_list, index, invalid_num):
+    sum = 0
+    first_index = index
+    while index < (len(num_list)) and sum < invalid_num:
+        sum += num_list[index]
+        index += 1
+
+    if sum == invalid_num:
+        return first_index, index
+    return 0
+
+
+def day_09_challenge_part_2(invalid_num):
+    num_list = [int(line.strip()) for line in open('input_09_day.txt', 'r')]
+
+    index = 0
+    while index < (len(num_list)):
+
+        output = check_invalid(num_list, index, invalid_num)
+        if output:
+            return num_list[output[0]]+num_list[output[1]]
+
+        index += 1
+
+    return 0
 
 
 def main():
-    print(day_09_challenge_part_1())
+    # print(day_09_challenge_part_1())
     invalid_num = day_09_challenge_part_1()
     print(day_09_challenge_part_2(invalid_num))
 
