@@ -26,13 +26,20 @@ def day_09_challenge_part_1():
 
 def check_invalid(num_list, index, invalid_num):
     sum = 0
-    first_index = index
+    smallest_num = float('inf')
+    largest_num = float('-inf')
+
     while index < (len(num_list)) and sum < invalid_num:
-        sum += num_list[index]
+        num = num_list[index]
+        sum += num
+        if num < smallest_num:
+            smallest_num = num
+        if num > largest_num:
+            largest_num = num
         index += 1
 
     if sum == invalid_num:
-        return first_index, index
+        return smallest_num, largest_num
     return 0
 
 
@@ -44,7 +51,7 @@ def day_09_challenge_part_2(invalid_num):
 
         output = check_invalid(num_list, index, invalid_num)
         if output:
-            return num_list[output[0]]+num_list[output[1]]
+            return output[0]+output[1]
 
         index += 1
 
