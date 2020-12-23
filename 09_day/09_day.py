@@ -1,23 +1,37 @@
-import os
+def check_sum(preamble_numlist, current_num):
+    for num1 in preamble_numlist:
+        for num2 in preamble_numlist:
+            if ((num1 + num2) == current_num) and num1 != num2:
+                return True
+    return False
 
 
 def day_09_challenge_part_1():
-    input_file = "input_09_day.txt"
+    num_list = [int(line.strip()) for line in open('input_09_day.txt', 'r')]
 
-    with open(input_file, "r") as file:
-        prev_lines = []
-        line = int(file.readline().strip())
+    preamble = 25
+    index = preamble
+    preamble_numlist = num_list[index-preamble:index]
 
-        while line:
-            prev_lines.append(line)
-            line = int(file.readline().strip())
+    while index < (len(num_list)):
+        preamble_numlist = num_list[index-preamble:index]
+        current_num = num_list[index]
+        if not check_sum(preamble_numlist, current_num):
+            return current_num
+
+        index += 1
 
     return 0
-    
+
+
+def day_09_challenge_part_2():
+
 
 def main():
     print(day_09_challenge_part_1())
-    
+    invalid_num = day_09_challenge_part_1()
+    print(day_09_challenge_part_2(invalid_num))
+
 
 if __name__ == "__main__":
     main()
