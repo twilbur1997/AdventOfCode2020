@@ -1,23 +1,26 @@
-import os
-
-
 def day_10_challenge_part_1():
-    input_file = "input_10_day.txt"
+    num_list = [int(line.strip()) for line in open('input_10_day.txt', 'r')]
 
-    with open(input_file, "r") as file:
-        prev_lines = []
-        line = int(file.readline().strip())
+    num_list.sort()
+    prev_num = 0
+    count_list = [0, 0, 1] # 1, 2, and 3
+    for num in num_list:
+        diff = num - prev_num
 
-        while line:
-            prev_lines.append(line)
-            line = int(file.readline().strip())
+        if diff == 1:
+            count_list[0] += 1
+        elif diff == 3:
+            count_list[2] += 1
 
-    return 0
-    
+
+        prev_num = num
+
+    return count_list[0]*count_list[2]
+
 
 def main():
     print(day_10_challenge_part_1())
-    
+
 
 if __name__ == "__main__":
     main()
