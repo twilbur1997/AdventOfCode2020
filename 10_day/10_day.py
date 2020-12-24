@@ -6,12 +6,7 @@ def day_10_challenge_part_1():
     count_list = [0, 0, 1] # 1, 2, and 3
     for num in num_list:
         diff = num - prev_num
-
-        if diff == 1:
-            count_list[0] += 1
-        elif diff == 3:
-            count_list[2] += 1
-
+        count_list[diff-1] += 1
 
         prev_num = num
 
