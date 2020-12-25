@@ -38,33 +38,46 @@ def day_11_challenge_part_1():
 
     new_seats = []
     y_coord = 0
-    for seat_string in seat_list:
-        new_seat_string = []
-        x_coord = 0
+    seats_changing = True
+    while seats_changing:
+        for seat_string in seat_list:
+            new_seat_string = []
+            x_coord = 0
+            for seat in seat_string:
+                if seat == ".":
+                    new_seats.append(".")
+
+                elif seat == "L":
+                    if change_seat_status(x_coord, y_coord, seat_list, False):
+                        new_seats.append("#")
+                    else:
+                        new_seats.append("L")
+
+                elif seat == "#":
+                    if change_seat_status(x_coord, y_coord, seat_list, True):
+                        new_seats.append("L")
+                    else:
+                        new_seats.append("#")
+
+                x_coord += 1
+            new_seats.append(new_seat_string)
+
+            y_coord += 1
+        seats_changing = False
+        for seat_str_new, seat_str_old in zip(new_seats, seat_list):
+            if seat_str_new != seat_str_old:
+                seat_list = new_seats
+                seats_changing = True
+                continue
+        break
+
+    total_occupied = 0
+    for seat_str in new_seats:
         for seat in seat_string:
-            if seat == ".":
-                new_seats.append(".")
+            if seat == "#":
+                total_occupied += 1
 
-            elif seat == "L":
-                if change_seat_status(x_coord, y_coord, seat_list, False):
-                    new_seats.append("#")
-                else:
-                    new_seats.append("L")
-
-            elif seat == "#":
-                if change_seat_status(x_coord, y_coord, seat_list, True):
-                    new_seats.append("L")
-                else:
-                    new_seats.append("#")
-            else:
-
-            x_coord += 1
-
-        y_coord += 1
-
-
-
-    return 0
+    return total_occupied
 
 
 def main():
